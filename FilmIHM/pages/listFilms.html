@@ -25,8 +25,17 @@
 </div>
 
 <script>
+	$(document).ready(function(){
+	if(location.href.split("?")[1] !== undefined){
+		var query = location.href.split("?")[1].split("=")[1];
+	}
 
 	$.each(films,function(k,film){
+		if(query != undefined){
+			if(film.name.toLowerCase().indexOf(query) < 0){
+				return true; //same as continue.
+			}
+		}
 		var htmlToAppend="";
 		htmlToAppend+="<div href='#detail?id="+film.id+"' class='film large-6 columns detail'>";
 			htmlToAppend+="<div class='large-6 small-6 columns'>";
@@ -35,20 +44,6 @@
 			htmlToAppend+="<div class='large-6 small-6 columns'>"
 				htmlToAppend+="<div>"+film.name+"</div>";
 			    htmlToAppend+="<div>"+film.date+"</div>";
-			    //htmlToAppend+="<div>"+film.duree+"</div>";
-			    /*
-			    htmlToAppend+="<div>";
-			    var cpt=0;
-				    $.each(film.genres,function(k,v){
-				    	cpt++;
-				    	if(cpt===film.genres.length){
-				    		htmlToAppend+=v;
-				    	}
-				    	else{
-				    		htmlToAppend+=v+",";
-				    	}
-					});
-				htmlToAppend+="</div>";*/
 			    htmlToAppend+="<div>De "+film.realisateur+"</div>";
 			    htmlToAppend+="<div>avec ";
 			    var cpt = 0;
@@ -67,34 +62,20 @@
 		htmlToAppend+="</div>";
 		$("#film").append(htmlToAppend);
 	});
-//	$("#film").append("<div style='clear:both'></div>");
 
 
 	$(".detail").click(function(){
 		location.href = $(this).attr('href');
-		//var id = $(this).attr("id");
-		//alert(id);
-		//loadPage("ficheFilm");
 	});
-
-	function getCookie(cname) {
-	    var name = cname + "=";
-	    var ca = document.cookie.split(';');
-	    for(var i = 0; i <ca.length; i++) {
-	        var c = ca[i];
-	        while (c.charAt(0)==' ') {
-	            c = c.substring(1);
-	        }
-	        if (c.indexOf(name) == 0) {
-	            return c.substring(name.length,c.length);
-	        }
-	    }
-	    return "";
-	} 
 
 	var filmsCookie = JSON.parse(getCookie("films"));
 
 		$.each(filmsCookie,function(k,film){
+			if(query != undefined){
+				if(film.name.toLowerCase().indexOf(query) < 0){
+					return true; //same as continue.
+				}
+			}
 		var htmlToAppend="";
 		htmlToAppend+="<div href='#detail?id="+film.id+"' class='film large-6 columns detail'>";
 			htmlToAppend+="<div class='large-6 small-6 columns'>";
@@ -103,20 +84,6 @@
 			htmlToAppend+="<div class='large-6 small-6 columns'>"
 				htmlToAppend+="<div>"+film.name+"</div>";
 			    htmlToAppend+="<div>"+film.date+"</div>";
-			    //htmlToAppend+="<div>"+film.duree+"</div>";
-			    /*
-			    htmlToAppend+="<div>";
-			    var cpt=0;
-				    $.each(film.genres,function(k,v){
-				    	cpt++;
-				    	if(cpt===film.genres.length){
-				    		htmlToAppend+=v;
-				    	}
-				    	else{
-				    		htmlToAppend+=v+",";
-				    	}
-					});
-				htmlToAppend+="</div>";*/
 			    htmlToAppend+="<div>De "+film.realisateur+"</div>";
 			    htmlToAppend+="<div>avec ";
 			    var cpt = 0;
@@ -137,6 +104,7 @@
 	});
 	$("#film").append("<div style='clear:both'></div>");
 
+	});
 
 
 </script>

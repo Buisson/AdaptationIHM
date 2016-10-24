@@ -3,6 +3,11 @@
 		border:5px ridge lightblue;
 		margin:15px 0;
 	}
+	.com{
+		margin:0 2em;
+		padding:15px;
+	}
+
 	/*even and odd :)*/
 	.com:nth-child(even){
 		background-color:#CCC;
@@ -13,17 +18,40 @@
 	<div id='contentDetailFilm'></div>
 </div>
 <div class='row'>
-	<input id='comment' class='large-12 columns' placeholder='ajoutez un commentaire' />
+	<div class='row' style='background-color:#CCC;margin:2em;padding:2em'>
+		<input id='pseudo' class='large-1 columns' placeholder='pseudo' />
+		<div class='large-1 columns'>&nbsp;</div>
+		<textarea id='comment' class='large-10 columns' placeholder='ajoutez un commentaire'></textarea>
+		<div class='large-10 columns'>
+			<div id="rateYo"></div>
+		</div>
+		<div class='large-2 columns'>
+			<button id='commenter' class='button'>Comment</button>
+		</div>
+	</div>
+
 	<div id='listComments'>
-		<h2>Liste des commentaires : </h2>
+		<h2  style='margin:1em;'>Liste des commentaires : </h2>
 		<div class='com'>
-			Génial!
+			<div style='font-weight: bold;'>De toto42 :</div>
+			<div style='text-align:center;'>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in leo pharetra, mattis sem id, cursus sem. Pellentesque eu finibus ipsum. Nullam et auctor est. Sed semper quam nisl, gravida interdum purus venenatis consequat. Integer mollis neque quis nisi venenatis, a varius dolor vulputate. Ut felis est, faucibus eget interdum quis, imperdiet id turpis. Praesent euismod ac erat eget auctor. Donec vestibulum sit amet eros quis aliquam. Cras ac sapien et nibh vulputate rutrum. Quisque eu velit eu quam condimentum viverra.
+				<div id='ratetoto42'></div>
+			</div>
 		</div>
 		<div class='com'>
-			Cool!
+			<div style='font-weight: bold;'>De Frilam :</div>
+			<div style='text-align:center;'>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sed porttitor metus. Vestibulum iaculis risus vel consectetur imperdiet. Suspendisse sed commodo neque. Etiam dignissim lectus et eros ornare, eu sagittis mi tempor. Praesent eleifend nisi in augue venenatis malesuada. Integer bibendum a arcu nec malesuada. Cras hendrerit tempus turpis quis volutpat. Aliquam gravida, dui condimentum finibus luctus, nisl ex varius nisl, a feugiat odio leo ac est. Morbi porta nulla nulla, a eleifend quam vulputate vel. Fusce dapibus, metus at venenatis feugiat, risus est lobortis purus, non tincidunt enim leo ut magna. Ut a lacus ullamcorper massa fermentum volutpat. Proin nec justo quis diam euismod dapibus. Fusce risus urna, iaculis id sodales eget, lacinia quis mi. Nulla fringilla hendrerit purus, et aliquam mi iaculis vitae. 
+				<div id='ratefrilam'></div>
+			</div>
 		</div>
 		<div class='com'>
-			Cool!
+			<div style='font-weight: bold;'>De H4xX0|? :</div>
+			<div style='text-align:center;'>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in nunc scelerisque, sodales dui id, interdum sapien. Sed tempus est rhoncus tincidunt elementum. Nullam ipsum purus, faucibus vel interdum id, condimentum et nisl. Sed placerat sed nisi ac auctor. Phasellus sodales aliquam nibh ut posuere. Duis quis magna porta, suscipit tellus non, placerat tortor. Cras cursus ante a ex vehicula posuere. Proin id porttitor sem, in ornare sapien. 
+				<div id='ratehax'></div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -32,17 +60,39 @@
 <script>
 $(document).ready(function(){
 	setTimeout(function(){
+		$('#ratetoto42').rateYo({
+			rating: 1.2,
+			readOnly: true
+		});
+		$('#ratefrilam').rateYo({
+			rating: 5,
+			readOnly: true
+		});
+		$('#ratehax').rateYo({
+			rating: 4.2,
+			readOnly: true
+		});
+
+		$("#rateYo").rateYo({
+		    rating: 3.6
+		});
 
 		var idOfFilm = location.href.split("?")[1].split("=")[1];
 		//alert(idOfFilm);
 		//alert(films[idOfFilm - 1]);
 
 		var film = films[idOfFilm - 1];
+		if(film === undefined){
+			film = JSON.parse(getCookie("films"))[0];
+		}
 		htmlToAppend="";
 
 		htmlToAppend+="<div style='font-size:22px;font-weight:bold;margin:22px;'>"+film.name+"</div>";
 
 		htmlToAppend+="<div class='large-6 columns'>";
+			if(film.image === undefined){
+				film.image = "default.jpg";
+			}
 			htmlToAppend+="<img src='images/"+film.image+"'/>";
 		htmlToAppend+="</div>";
 
@@ -84,13 +134,27 @@ $(document).ready(function(){
 	},100);
 
 
-	$("#comment").keydown(function(e){
-		if(e.which == 13){
-			//alert($(this).val());
-			var newComment = "<div class='com'>"+$(this).val()+"</div>";
-			$("#listComments").append(newComment);
-			$(this).val("");
-		}
+
+	$("#commenter").click(function(){
+
+		//alert($(this).val());
+		var newComment = "<div class='com'>"+
+			"<div style='font-weight: bold;'>De "+$("#pseudo").val()+" :</div><div style='text-align:center;'>"+$("#comment").val()+
+			"</div><div id='rate"+$("#pseudo").val()+"'></div></div>";
+		$("#listComments").append(newComment);
+
+		var stars = $("#rateYo").rateYo("rating");
+		var tmpName = "#rate"+$("#pseudo").val();
+		//alert(tmpName);
+		$(tmpName).rateYo({
+			rating: stars,
+			readOnly: true
+		});
+
+		/*vidage des champs*/
+		$("#comment").val("");
+		$("#pseudo").val("");
 	});
+
 });
 </script>
