@@ -2,7 +2,7 @@
 	.film{
 		border-bottom: 1px dotted #CCC;
 		margin-bottom:5px;
-		min-height:200px;
+		min-height:240px;
 	}
 
 	.film .large-6 img{
@@ -12,6 +12,9 @@
 
 	.detail{
 		cursor:pointer;
+	}
+	.detailFILM div{
+		margin-top:5px;
 	}
 </style>
 
@@ -41,11 +44,11 @@
 			htmlToAppend+="<div class='large-6 small-6 columns'>";
 				htmlToAppend+="<img src='images/"+film.image+"'/>";
 			htmlToAppend+="</div>";
-			htmlToAppend+="<div class='large-6 small-6 columns'>"
-				htmlToAppend+="<div>"+film.name+"</div>";
+			htmlToAppend+="<div class='large-6 small-6 columns detailFILM'>"
+				htmlToAppend+="<div style='font-weight:bold;'>"+film.name+"</div>";
 			    htmlToAppend+="<div>"+film.date+"</div>";
 			    htmlToAppend+="<div>De "+film.realisateur+"</div>";
-			    htmlToAppend+="<div>avec ";
+			    htmlToAppend+="<div>avec : ";
 			    var cpt = 0;
 			    $.each(film.acteurs,function(k,v){
 			    	cpt++;
