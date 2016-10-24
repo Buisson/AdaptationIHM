@@ -1,0 +1,142 @@
+<style>
+	.film{
+		border-bottom: 1px dotted #CCC;
+		margin-bottom:5px;
+		min-height:200px;
+	}
+
+	.film .large-6 img{
+		width:50%;
+		height:auto;
+	}
+
+	.detail{
+		cursor:pointer;
+	}
+</style>
+
+
+<div class='row'>
+	<div style='text-align:center;margin-bottom:25px;'>
+		<h1>Tous nos films</h1>
+	</div>
+
+	<div id='film'></div>
+</div>
+
+<script>
+
+	$.each(films,function(k,film){
+		var htmlToAppend="";
+		htmlToAppend+="<div href='#detail?id="+film.id+"' class='film large-6 columns detail'>";
+			htmlToAppend+="<div class='large-6 small-6 columns'>";
+				htmlToAppend+="<img src='images/"+film.image+"'/>";
+			htmlToAppend+="</div>";
+			htmlToAppend+="<div class='large-6 small-6 columns'>"
+				htmlToAppend+="<div>"+film.name+"</div>";
+			    htmlToAppend+="<div>"+film.date+"</div>";
+			    //htmlToAppend+="<div>"+film.duree+"</div>";
+			    /*
+			    htmlToAppend+="<div>";
+			    var cpt=0;
+				    $.each(film.genres,function(k,v){
+				    	cpt++;
+				    	if(cpt===film.genres.length){
+				    		htmlToAppend+=v;
+				    	}
+				    	else{
+				    		htmlToAppend+=v+",";
+				    	}
+					});
+				htmlToAppend+="</div>";*/
+			    htmlToAppend+="<div>De "+film.realisateur+"</div>";
+			    htmlToAppend+="<div>avec ";
+			    var cpt = 0;
+			    $.each(film.acteurs,function(k,v){
+			    	cpt++;
+			    	if(cpt === film.acteurs.length)
+			      		htmlToAppend+=v;
+			      	else
+			      		htmlToAppend+=v+",";
+			    });
+			    htmlToAppend+="</div>";
+				htmlToAppend+="<div>";
+					htmlToAppend+="<a href='#detail?id="+film.id+"' class='button detail' id='"+film.id+"'>Voir la fiche du film</a>";
+				htmlToAppend+="</div>";    
+			htmlToAppend+="</div>";
+		htmlToAppend+="</div>";
+		$("#film").append(htmlToAppend);
+	});
+//	$("#film").append("<div style='clear:both'></div>");
+
+
+	$(".detail").click(function(){
+		location.href = $(this).attr('href');
+		//var id = $(this).attr("id");
+		//alert(id);
+		//loadPage("ficheFilm");
+	});
+
+	function getCookie(cname) {
+	    var name = cname + "=";
+	    var ca = document.cookie.split(';');
+	    for(var i = 0; i <ca.length; i++) {
+	        var c = ca[i];
+	        while (c.charAt(0)==' ') {
+	            c = c.substring(1);
+	        }
+	        if (c.indexOf(name) == 0) {
+	            return c.substring(name.length,c.length);
+	        }
+	    }
+	    return "";
+	} 
+
+	var filmsCookie = JSON.parse(getCookie("films"));
+
+		$.each(filmsCookie,function(k,film){
+		var htmlToAppend="";
+		htmlToAppend+="<div href='#detail?id="+film.id+"' class='film large-6 columns detail'>";
+			htmlToAppend+="<div class='large-6 small-6 columns'>";
+				htmlToAppend+="<img src='images/"+film.image+"'/>";
+			htmlToAppend+="</div>";
+			htmlToAppend+="<div class='large-6 small-6 columns'>"
+				htmlToAppend+="<div>"+film.name+"</div>";
+			    htmlToAppend+="<div>"+film.date+"</div>";
+			    //htmlToAppend+="<div>"+film.duree+"</div>";
+			    /*
+			    htmlToAppend+="<div>";
+			    var cpt=0;
+				    $.each(film.genres,function(k,v){
+				    	cpt++;
+				    	if(cpt===film.genres.length){
+				    		htmlToAppend+=v;
+				    	}
+				    	else{
+				    		htmlToAppend+=v+",";
+				    	}
+					});
+				htmlToAppend+="</div>";*/
+			    htmlToAppend+="<div>De "+film.realisateur+"</div>";
+			    htmlToAppend+="<div>avec ";
+			    var cpt = 0;
+			    $.each(film.acteurs,function(k,v){
+			    	cpt++;
+			    	if(cpt === film.acteurs.length)
+			      		htmlToAppend+=v;
+			      	else
+			      		htmlToAppend+=v+",";
+			    });
+			    htmlToAppend+="</div>";
+				htmlToAppend+="<div>";
+					htmlToAppend+="<a href='#detail?id="+film.id+"' class='button detail' id='"+film.id+"'>Voir la fiche du film</a>";
+				htmlToAppend+="</div>";    
+			htmlToAppend+="</div>";
+		htmlToAppend+="</div>";
+		$("#film").append(htmlToAppend);
+	});
+	$("#film").append("<div style='clear:both'></div>");
+
+
+
+</script>

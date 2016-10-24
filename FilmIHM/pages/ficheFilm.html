@@ -1,0 +1,96 @@
+<style>
+	.descriptionFilm{
+		border:5px ridge lightblue;
+		margin:15px 0;
+	}
+	/*even and odd :)*/
+	.com:nth-child(even){
+		background-color:#CCC;
+	}
+</style>
+
+<div class='row'>	
+	<div id='contentDetailFilm'></div>
+</div>
+<div class='row'>
+	<input id='comment' class='large-12 columns' placeholder='ajoutez un commentaire' />
+	<div id='listComments'>
+		<h2>Liste des commentaires : </h2>
+		<div class='com'>
+			Génial!
+		</div>
+		<div class='com'>
+			Cool!
+		</div>
+		<div class='com'>
+			Cool!
+		</div>
+	</div>
+</div>
+
+
+<script>
+$(document).ready(function(){
+	setTimeout(function(){
+
+		var idOfFilm = location.href.split("?")[1].split("=")[1];
+		//alert(idOfFilm);
+		//alert(films[idOfFilm - 1]);
+
+		var film = films[idOfFilm - 1];
+		htmlToAppend="";
+
+		htmlToAppend+="<div style='font-size:22px;font-weight:bold;margin:22px;'>"+film.name+"</div>";
+
+		htmlToAppend+="<div class='large-6 columns'>";
+			htmlToAppend+="<img src='images/"+film.image+"'/>";
+		htmlToAppend+="</div>";
+
+		htmlToAppend+="<div class='large-6 columns'>";
+		    htmlToAppend+="<div>Date de sortie : "+film.date+"</div>";
+		    htmlToAppend+="<div>Durée du film : "+film.duree+"</div>";
+		    
+		    htmlToAppend+="<div> Genres : ";
+		    var cpt=0;
+			    $.each(film.genres,function(k,v){
+			    	cpt++;
+			    	if(cpt===film.genres.length){
+			    		htmlToAppend+=v;
+			    	}
+			    	else{
+			    		htmlToAppend+=v+",";
+			    	}
+				});
+			htmlToAppend+="</div>";
+		    htmlToAppend+="<div>De "+film.realisateur+"</div>";
+		    htmlToAppend+="<div>avec ";
+			    var cpt = 0;
+			    $.each(film.acteurs,function(k,v){
+			    	cpt++;
+			    	if(cpt === film.acteurs.length)
+			      		htmlToAppend+=v;
+			      	else
+			      		htmlToAppend+=v+",";
+			    });
+
+		    htmlToAppend+="</div>";
+
+		    htmlToAppend+="<div class='descriptionFilm'>";
+		    	htmlToAppend+=film.description;
+		    htmlToAppend+="</div>";
+		htmlToAppend+="</div>";
+
+	    $("#contentDetailFilm").append(htmlToAppend);
+	},100);
+
+
+	$("#comment").keydown(function(e){
+		if(e.which == 13){
+			//alert($(this).val());
+			var newComment = "<div class='com'>"+$(this).val()+"</div>";
+			$("#listComments").append(newComment);
+			$(this).val("");
+		}
+	});
+});
+</script>

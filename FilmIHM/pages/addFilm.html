@@ -1,0 +1,117 @@
+<!-- 
+name : "Star Wars IV : Un nouvel espoir",
+date : "1977",
+duree : "2h01m",
+genre : "SF",
+realisateur : "George Lucas",
+acteurs : ["Mark Hamill", "Harrison Ford", "Carrie Fisher"],
+description:
+
+-->
+
+
+<div class='row' style='margin:0 5em'>
+	<h1>Ajoutez un film</h1>
+
+	<form>
+		<div class='row'>
+			<div class="large-6 columns">
+			  <label> Nom
+			    <input id='film_name' type="text" placeholder="Nom" />
+			  </label>
+			</div>
+			<div class="large-6 columns">
+			  <label> Date de sortie
+			    <input id='film_dateSortie' type="text" placeholder="Date de sortie" />
+			  </label>
+			</div>
+		</div>
+		<div class='row'>
+			<div class="large-6 columns">
+			  <label> Durée (exemple : 1h21m)
+			    <input id='film_duree' type="text" placeholder="Durée (exemple : 1h21m)" />
+			  </label>
+			</div>
+			<div class="large-6 columns">
+			  <label>Genre
+		        <select id='film_genre'>
+		          <option value="SF">SF</option>
+		          <option value="Humour">Humour</option>
+		          <option value="Drame">Drame</option>
+		          <option value="Horreur">Horreur</option>
+		        </select>
+		      </label>
+			</div>
+		</div>
+		<div class='row'>
+			<div class='large-6 columns'>
+				<label> Realisateur
+					<input id='film_real' type='text' placeholder="Réalisateur" />
+				</label>
+			</div>
+
+			<div class='large-6 columns'>
+				<label> Acteurs
+					<input id='film_actor' type='text' placeholder="Acteurs" />
+				</label>
+			</div>
+
+		</div>
+
+		<div class='row'>
+		    <div class="large-12 columns">
+		      <label>Description
+		        <textarea id='film_description' placeholder="Description"></textarea>
+		      </label>
+		    </div>
+		</div>
+
+		<div class='row'>
+			<div style='text-align:center;'>
+				<button id='addFilm' class='button'>Ajouter</button>
+			</div>
+		</div>
+
+	</form>
+</div>
+
+
+
+<script>
+	$(document).ready(function(){
+		$('#film_dateSortie').fdatepicker({
+			/*initialDate: '02-12-1989',*/
+			format: 'dd/mm/yyyy',
+			disableDblClickSelection: true
+		});
+
+		$("#addFilm").click(function(){
+			/*
+			{
+		      name : "Star Wars IV : Un nouvel espoir",
+		      date : "1977",
+		      duree : "2h01m",
+		      genre : ["SF"],
+		      realisateur : "George Lucas",
+		      acteurs : ["Mark Hamill", "Harrison Ford", "Carrie Fisher"],
+		      description:"Il y a bien longtemps, dans une galaxie très lointaine... La guerre civile fait rage entre l'Empire galactique et l'Alliance rebelle. Capturée par les troupes de choc de l'Empereur menées par le sombre et impitoyable Dark Vador, la princesse Leia Organa dissimule les plans de l'Etoile Noire, une station spatiale invulnérable, à son droïde R2-D2 avec pour mission de les remettre au Jedi Obi-Wan Kenobi. Accompagné de son fidèle compagnon, le droïde de protocole C-3PO, R2-D2 s'échoue sur la planète Tatooine et termine sa quête chez le jeune Luke Skywalker. Rêvant de devenir pilote mais confiné aux travaux de la ferme, ce dernier se lance à la recherche de ce mystérieux Obi-Wan Kenobi, devenu ermite au coeur des montagnes désertiques de Tatooine... ",
+		      note : "5"
+		    }
+			*/
+			var newFilm = {};
+			newFilm.name = $("#film_name").val();
+			newFilm.date = $("#film_dateSortie").val();
+			newFilm.duree = $("#film_duree").val();
+			newFilm.genre = [];
+			newFilm.genre[0] = $("#film_genre").val();
+			newFilm.realisateur = $("#film_real").val();
+			newFilm.acteurs = [];
+			newFilm.acteurs[0] = $("#film_actor").val();
+			newFilm.description = $("#film_description").val();
+			//alert(JSON.stringify(newFilm));
+			document.cookie = "films = ["+JSON.stringify(newFilm)+"];expires=Thu,4 Dec 2018 23:59:59 GMT";
+			//alert(document.cookie);
+			//console.log();
+		});
+	});
+</script>
