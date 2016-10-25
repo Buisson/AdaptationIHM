@@ -125,22 +125,6 @@
           loadPage("welcome");
         });
 
-        $(".menuRFS").click(function(){
-          //alert('ici');
-          switch($(this).attr('href')){
-            case "#All":
-              loadPage("listFilms");
-            break;
-            case "#Add":
-              loadPage("addFilm");
-            break;
-            default:
-              alert("An Error occured when pageLoad ...");
-            break;
-          }
-
-        });
-
         $(window).on('hashchange',function(){
           var hrefToLoad=location.href.split("#")[1];
           if(hrefToLoad !== undefined){

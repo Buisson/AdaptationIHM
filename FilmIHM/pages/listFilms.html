@@ -50,7 +50,8 @@
 		location.href = $(this).attr('href');
 	});
 
-	var filmsCookie = JSON.parse(getCookie("films"));
+	if(getCookie("films") !== ""){
+		var filmsCookie = JSON.parse(getCookie("films"));
 
 		$.each(filmsCookie,function(k,film){
 			if(query != undefined){
@@ -58,41 +59,43 @@
 					return true; //same as continue.
 				}
 			}
-		var htmlToAppend="";
-		htmlToAppend+="<div href='#detail?id="+film.id+"' class='film large-6 columns detail'>";
-			htmlToAppend+="<div class='large-6 small-6 columns'>";
-				if(film.image === undefined){
-					film.image="default.jpg";
-				}
-				htmlToAppend+="<img src='images/"+film.image+"'/>";
+			var htmlToAppend="";
+			htmlToAppend+="<div href='#detail?id="+film.id+"' class='film large-6 columns detail'>";
+				htmlToAppend+="<div class='large-6 small-6 columns'>";
+					if(film.image === undefined){
+						film.image="default.jpg";
+					}
+					htmlToAppend+="<img src='images/"+film.image+"'/>";
+				htmlToAppend+="</div>";
+				htmlToAppend+="<div class='large-6 small-6 columns'>"
+					htmlToAppend+="<div>"+film.name+"</div>";
+				    htmlToAppend+="<div>"+film.date+"</div>";
+				    htmlToAppend+="<div>De "+film.realisateur+"</div>";
+				    htmlToAppend+="<div>avec ";
+				    var cpt = 0;
+				    $.each(film.acteurs,function(k,v){
+				    	cpt++;
+				    	if(cpt === film.acteurs.length)
+				      		htmlToAppend+=v;
+				      	else
+				      		htmlToAppend+=v+",";
+				    });
+				    htmlToAppend+="</div>";
+					htmlToAppend+="<div>";
+						htmlToAppend+="<a href='#detail?id="+film.id+"' class='button detail' id='"+film.id+"'>Voir la fiche du film</a>";
+					htmlToAppend+="</div>";    
+				htmlToAppend+="</div>";
 			htmlToAppend+="</div>";
-			htmlToAppend+="<div class='large-6 small-6 columns'>"
-				htmlToAppend+="<div>"+film.name+"</div>";
-			    htmlToAppend+="<div>"+film.date+"</div>";
-			    htmlToAppend+="<div>De "+film.realisateur+"</div>";
-			    htmlToAppend+="<div>avec ";
-			    var cpt = 0;
-			    $.each(film.acteurs,function(k,v){
-			    	cpt++;
-			    	if(cpt === film.acteurs.length)
-			      		htmlToAppend+=v;
-			      	else
-			      		htmlToAppend+=v+",";
-			    });
-			    htmlToAppend+="</div>";
-				htmlToAppend+="<div>";
-					htmlToAppend+="<a href='#detail?id="+film.id+"' class='button detail' id='"+film.id+"'>Voir la fiche du film</a>";
-				htmlToAppend+="</div>";    
-			htmlToAppend+="</div>";
-		htmlToAppend+="</div>";
-		$("#film").append(htmlToAppend);
-	});
-	$("#film").append("<div style='clear:both'></div>");
+			$("#film").append(htmlToAppend);
+		});
+		$("#film").append("<div style='clear:both'></div>");
 
 
 		if($(".film").length <=0){
 			$("#film").append("<div style='font-size:25px;font-weight:bold;'>Aucun résultat de films pour votre recherche ...</div>");
 		}
+
+	}
 	});
 
 
