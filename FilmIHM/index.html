@@ -7,6 +7,7 @@
     <title>Foundation for Sites</title>
     <link rel="stylesheet" href="css/foundation.css">
     <link rel="stylesheet" href="css/app.css">
+    <link rel='stylesheet' href='css/ficheFilm.css'>
     <link rel='stylesheet' href="css/foundation-datepicker.min.css">
     <link rel='stylesheet' href="fonts/foundation-icons/foundation-icons.css">
     <script src='js/films.js'></script>
@@ -166,6 +167,12 @@
         $(".buttonRechercheFilm").click(function(){
           location.href = "#All?q="+$(this).parent().find(".rechercherFilm").val();
           //alert('recherche de '+$(this).parent().find(".rechercherFilm").val());
+        });
+
+        $(".rechercherFilm").keydown(function(e){
+          if(e.which === 13){
+            location.href = "#All?q="+$(this).parent().find(".rechercherFilm").val();
+          }
         });
 
       });

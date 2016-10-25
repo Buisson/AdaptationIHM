@@ -1,19 +1,7 @@
-<!-- 
-name : "Star Wars IV : Un nouvel espoir",
-date : "1977",
-duree : "2h01m",
-genre : "SF",
-realisateur : "George Lucas",
-acteurs : ["Mark Hamill", "Harrison Ford", "Carrie Fisher"],
-description:
-
--->
-
-
 <div class='row' style='margin: 0 auto;'>
-	<h1>Ajoutez un film</h1>
+	<h1 style='margin : 0 1em;'>Ajoutez un film</h1>
 
-	<form>
+	<form style='margin : 0 2em;'>
 		<div class='row'>
 			<div class="large-6 columns">
 			  <label> Nom
@@ -61,7 +49,7 @@ description:
 		<div class='row'>
 		    <div class="large-12 columns">
 		      <label>Description
-		        <textarea id='film_description' placeholder="Description"></textarea>
+		        <textarea rows='4' id='film_description' placeholder="Description"></textarea>
 		      </label>
 		    </div>
 		</div>
@@ -100,7 +88,6 @@ description:
 			//alert(JSON.stringify(newFilm));
 			document.cookie = "films = ["+JSON.stringify(newFilm)+"];expires=Thu,4 Dec 2018 23:59:59 GMT";
 			//alert(document.cookie);
-			//console.log();
 
 			location.href='#detail?id=c1';
 		});

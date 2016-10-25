@@ -1,29 +1,13 @@
-<style>
-	.descriptionFilm{
-		border:5px ridge lightblue;
-		margin:15px 0;
-	}
-	.com{
-		margin:0 2em;
-		padding:15px;
-	}
-
-	/*even and odd :)*/
-	.com:nth-child(even){
-		background-color:#CCC;
-	}
-</style>
-
 <div class='row'>	
 	<div id='contentDetailFilm'></div>
 </div>
 <div class='row'>
 	<div class='row' style='background-color:#CCC;margin:2em;padding:2em'>
-		<input id='pseudo' class='large-1 columns' placeholder='pseudo' />
-		<div class='large-1 columns'>&nbsp;</div>
-		<textarea id='comment' class='large-10 columns' placeholder='ajoutez un commentaire'></textarea>
+		<input id='pseudo' class='large-2 columns' placeholder='pseudo' />
+		<div class='large-12 columns'>&nbsp;</div>
+		<textarea rows="4" id='comment' class='large-8 columns' placeholder='ajoutez un commentaire'></textarea>
 		<div class='large-10 columns'>
-			<div id="rateYo"></div>
+			Note : <div id="rateYo"></div>
 		</div>
 		<div class='large-2 columns'>
 			<button id='commenter' class='button'>Comment</button>
@@ -126,6 +110,7 @@ $(document).ready(function(){
 		    htmlToAppend+="</div>";
 
 		    htmlToAppend+="<div class='descriptionFilm'>";
+		    	htmlToAppend+="<h4>Résumé : </h4>";
 		    	htmlToAppend+=film.description;
 		    htmlToAppend+="</div>";
 		htmlToAppend+="</div>";

@@ -1,0 +1,14 @@
+.descriptionFilm{
+	border:5px ridge lightblue;
+	margin:15px 0;
+	padding:15px;
+}
+.com{
+	margin:0 2em;
+	padding:15px;
+}
+
+/*even and odd :)*/
+.com:nth-child(even){
+	background-color:#CCC;
+}

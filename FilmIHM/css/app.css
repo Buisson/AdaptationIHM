@@ -31,3 +31,21 @@
 .is-drilldown-submenu-parent > a::after {border-color: transparent transparent transparent #fff; }
 
 .js-drilldown-back::before {border-color: transparent #fff transparent transparent; }
+
+.film{
+	border-bottom: 1px dotted #CCC;
+	margin-bottom:5px;
+	min-height:240px;
+}
+
+.film .large-6 img{
+	width:50%;
+	height:auto;
+}
+
+.detail{
+	cursor:pointer;
+}
+.detailFILM div{
+	margin-top:5px;
+}
