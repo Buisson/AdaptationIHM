@@ -9,7 +9,7 @@
 <script>
 	$(document).ready(function(){
 	if(location.href.split("?")[1] !== undefined){
-		var query = location.href.split("?")[1].split("=")[1];
+		var query = location.href.split("?")[location.href.split("?").length - 1].split("=")[1];
 	}
 
 	$.each(films,function(k,film){
