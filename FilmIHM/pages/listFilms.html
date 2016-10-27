@@ -14,7 +14,7 @@
 
 	$.each(films,function(k,film){
 		if(query != undefined){
-			if(film.name.toLowerCase().indexOf(query) < 0){
+			if(film.name.toLowerCase().indexOf(query.toLowerCase()) < 0){
 				return true; //same as continue.
 			}
 		}
@@ -55,7 +55,7 @@
 
 		$.each(filmsCookie,function(k,film){
 			if(query != undefined){
-				if(film.name.toLowerCase().indexOf(query) < 0){
+				if(film.name.toLowerCase().indexOf(query.toLowerCase()) < 0){
 					return true; //same as continue.
 				}
 			}
