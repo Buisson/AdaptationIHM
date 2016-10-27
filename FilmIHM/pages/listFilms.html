@@ -45,11 +45,6 @@
 		$("#film").append(htmlToAppend);
 	});
 
-
-	$(".detail").click(function(){
-		location.href = $(this).attr('href');
-	});
-
 	if(getCookie("films") !== ""){
 		var filmsCookie = JSON.parse(getCookie("films"));
 
@@ -90,6 +85,9 @@
 		});
 		$("#film").append("<div style='clear:both'></div>");
 
+		$(".detail").click(function(){
+			location.href = $(this).attr('href');
+		});
 
 		if($(".film").length <=0){
 			$("#film").append("<div style='font-size:25px;font-weight:bold;'>Aucun résultat de films pour votre recherche ...</div>");
